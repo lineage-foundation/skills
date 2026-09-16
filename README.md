@@ -71,10 +71,10 @@ All three must pass before committing.
 
 ## Drift detection
 
-Sources are pinned to commits. To check if any pinned commit has moved:
+Sources are pinned to commits. To check if any upstream repositories have moved past their pins:
 
 ```bash
 npm run drift
 ```
 
-If a source has drifted (the commit exists but the file or content at that commit changed), the command will report it. Review the report and re-pin as needed in `sources/sources.json`.
+This command checks each source in `sources/sources.json` and reports any whose upstream repository has commits newer than the pinned commit — i.e., the pin is behind the source's latest default-branch HEAD. A STALE report means the source has moved on since it was pinned, so the skills citing it should be reviewed and the pin updated (re-pinned) if the content still matches.
