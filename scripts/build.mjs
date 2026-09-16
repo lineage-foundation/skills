@@ -16,7 +16,7 @@ const writeJson = (path, obj) => {
 
 export function build(rootDir) {
   const skills = listSkills(join(rootDir, 'skills')).sort((a, b) =>
-    a.name.localeCompare(b.name),
+    a.name < b.name ? -1 : a.name > b.name ? 1 : 0,
   );
   const keywords = ['lineage', 'blockchain', 'sdk', 'web3', ...skills.map((s) => s.name)];
 
