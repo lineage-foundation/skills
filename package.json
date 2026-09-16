@@ -1,0 +1,16 @@
+{
+  "name": "@lineage-foundation/skills",
+  "version": "0.1.0",
+  "description": "Skills that make an AI coding agent expert in all things Lineage.",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "drift": "node scripts/drift-check.mjs",
+    "test": "node --test"
+  },
+  "author": { "name": "Lineage Foundation", "email": "info@lineage.foundation" }
+}
