@@ -38,3 +38,31 @@ test('unknown source id is an error', () => {
 test('missing description is an error', () => {
   assert.ok(validate(scaffold({ desc: '', sourcesLine: '- x' })).some((e) => /description/.test(e)));
 });
+
+test('content after Sources is ignored', () => {
+  const root = scaffold({ sourcesLine: '- x', srcIds: ['x'] });
+  writeFileSync(
+    join(root, 'skills/demo/SKILL.md'),
+    '---\nname: demo\ndescription: d\n---\n## Sources\n- x\n\n## Notes\n- somethingelse',
+  );
+  assert.deepEqual(validate(root), []);
+});
+
+test('malformed sources.json entry is an error', () => {
+  const root = scaffold({ sourcesLine: '- x', srcIds: ['x'] });
+  writeFileSync(
+    join(root, 'sources/sources.json'),
+    JSON.stringify({ sources: [{ id: 'y', repo: 'o/r' }] }),
+  );
+  assert.ok(validate(root).some((e) => /pin/.test(e)));
+});
+
+test('duplicate skill names is an error', () => {
+  const root = scaffold({ skillName: 'demo', sourcesLine: '- x', srcIds: ['x'] });
+  mkdirSync(join(root, 'skills/demo2'), { recursive: true });
+  writeFileSync(
+    join(root, 'skills/demo2/SKILL.md'),
+    '---\nname: demo\ndescription: d\n---\n## Sources\n- x',
+  );
+  assert.ok(validate(root).some((e) => /duplicate/.test(e)));
+});
