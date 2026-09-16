@@ -1,0 +1,58 @@
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { listSkills } from '../lib/skills.mjs';
+
+const AUTHOR = { name: 'Lineage Foundation', email: 'info@lineage.foundation' };
+const VERSION = '0.1.0';
+const DESCRIPTION =
+  'Expertise for building on Lineage: the SDKs, the /v1 API, two-way (DRUID) payments, valence, and running a node to develop against.';
+const REPO = 'https://github.com/lineage-foundation/skills';
+
+const writeJson = (path, obj) => {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, JSON.stringify(obj, null, 2) + '\n');
+};
+
+export function build(rootDir) {
+  const skills = listSkills(join(rootDir, 'skills')).sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
+  const keywords = ['lineage', 'blockchain', 'sdk', 'web3', ...skills.map((s) => s.name)];
+
+  writeJson(join(rootDir, '.claude-plugin/plugin.json'), {
+    name: 'lineage',
+    description: DESCRIPTION,
+    version: VERSION,
+    author: AUTHOR,
+  });
+
+  writeJson(join(rootDir, '.claude-plugin/marketplace.json'), {
+    name: 'lineage',
+    description: 'Lineage skills for AI coding agents.',
+    owner: AUTHOR,
+    plugins: [
+      { name: 'lineage', description: DESCRIPTION, version: VERSION, source: './', author: AUTHOR },
+    ],
+  });
+
+  writeJson(join(rootDir, '.codex-plugin/plugin.json'), {
+    name: 'lineage',
+    version: VERSION,
+    description: DESCRIPTION,
+    author: AUTHOR,
+    homepage: REPO,
+    repository: REPO,
+    license: 'MIT',
+    keywords,
+    skills: './skills/',
+  });
+
+  return skills;
+}
+
+const isMain = process.argv[1] === fileURLToPath(import.meta.url);
+if (isMain) {
+  const skills = build(join(dirname(fileURLToPath(import.meta.url)), '..'));
+  console.log(`built manifests for ${skills.length} skill(s)`);
+}

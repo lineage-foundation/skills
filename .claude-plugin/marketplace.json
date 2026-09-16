@@ -1,0 +1,20 @@
+{
+  "name": "lineage",
+  "description": "Lineage skills for AI coding agents.",
+  "owner": {
+    "name": "Lineage Foundation",
+    "email": "info@lineage.foundation"
+  },
+  "plugins": [
+    {
+      "name": "lineage",
+      "description": "Expertise for building on Lineage: the SDKs, the /v1 API, two-way (DRUID) payments, valence, and running a node to develop against.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Lineage Foundation",
+        "email": "info@lineage.foundation"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "lineage",
+  "version": "0.1.0",
+  "description": "Expertise for building on Lineage: the SDKs, the /v1 API, two-way (DRUID) payments, valence, and running a node to develop against.",
+  "author": {
+    "name": "Lineage Foundation",
+    "email": "info@lineage.foundation"
+  },
+  "homepage": "https://github.com/lineage-foundation/skills",
+  "repository": "https://github.com/lineage-foundation/skills",
+  "license": "MIT",
+  "keywords": [
+    "lineage",
+    "blockchain",
+    "sdk",
+    "web3"
+  ],
+  "skills": "./skills/"
+}
