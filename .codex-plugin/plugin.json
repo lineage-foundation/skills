@@ -15,7 +15,8 @@
     "sdk",
     "web3",
     "lineage-fundamentals",
-    "lineage-sdk-usage"
+    "lineage-sdk-usage",
+    "lineage-two-way-payments"
   ],
   "skills": "./skills/"
 }
