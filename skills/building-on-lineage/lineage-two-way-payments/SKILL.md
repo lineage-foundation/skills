@@ -22,13 +22,13 @@ relayed off-chain through **valence**.
   builds its half without it must add it before submitting. The invariant that
   matters is on the wire: the transaction you POST carries `version: 2`. A half
   submitted without it is the classic "swap never settles" bug.
-- **valence `/messages` carries plaintext offers**, mailboxed by address, with
-  auth headers: `address`, `public_key`, and `signature = ed25519(utf8(address))`
-  (the raw address, unhashed).
+- **valence `/messages` is an opaque per-mailbox relay**, mailboxed by address
+  and designed for end-to-end-encrypted payloads it never inspects. Auth
+  headers: `address`, `public_key`, and `signature = ed25519(utf8(address))`
+  (the raw address, unhashed). The reference sdk-js currently posts the offer
+  as unencrypted JSON.
 
 ## The handshake
-
-The steps (method names vary by SDK — check your SDK's two-way section):
 
 1. **Initiator** `make_2way_payment`: builds its half, persists it locally
    (encrypted), and POSTs the offer to the counterparty's valence mailbox.
