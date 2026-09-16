@@ -1,0 +1,15 @@
+{
+  "sources": [
+    { "id": "sdk-js-readme", "repo": "lineage-foundation/sdk-js", "path": "README.md", "pin": "6cde5f2bb7d355941a2d1b9cfeb2cc2f09d43f87", "anchor": "Installation" },
+    { "id": "sdk-python-readme", "repo": "lineage-foundation/sdk-python", "path": "README.md", "pin": "147570145e573129d27ab3feb37d7c61785d72ed", "anchor": "Installation" },
+    { "id": "sdk-go-readme", "repo": "lineage-foundation/sdk-go", "path": "README.md", "pin": "af3ec5568ecc6cb825d9d2f67bb7614ea8f80bae", "anchor": "Installation" },
+    { "id": "sdk-rust-readme", "repo": "lineage-foundation/sdk-rust", "path": "README.md", "pin": "8e7ecf07ae54421317b08b66fecac610f2a93742", "anchor": "Installation" },
+    { "id": "sdk-php-readme", "repo": "lineage-foundation/sdk-php", "path": "README.md", "pin": "fb8ee7d20c6cccdb46d7935fc8c5154072e3295e", "anchor": "Installation" },
+    { "id": "sdk-laravel-readme", "repo": "lineage-foundation/sdk-laravel", "path": "README.md", "pin": "f53cba12945786f2b66f619436f01a9489fd076b", "anchor": "Installation" },
+    { "id": "sdk-js-2way", "repo": "lineage-foundation/sdk-js", "path": "src/services/wallet.service.ts", "pin": "6cde5f2bb7d355941a2d1b9cfeb2cc2f09d43f87", "anchor": "make2WayPayment" },
+    { "id": "openapi", "repo": "lineage-foundation/website", "path": "public/openapi.json", "pin": "db37e5a1f2fdde893316b6626323126ad965f0a2", "anchor": "paths" },
+    { "id": "valence-readme", "repo": "lineage-foundation/valence", "path": "README.md", "pin": "22a9f12cc614591e3025a08d3afc7a1b2a0b3f00", "anchor": "messages" },
+    { "id": "fleet-readme", "repo": "lineage-foundation/fleet", "path": "README.md", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "Docker" },
+    { "id": "whitepaper", "url": "https://zenodo.org/records/19203176", "pin": "19203176", "anchor": "" }
+  ]
+}
