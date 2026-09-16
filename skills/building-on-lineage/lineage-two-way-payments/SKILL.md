@@ -15,14 +15,20 @@ relayed off-chain through **valence**.
 - **A DRUID half is an ordinary P2PKH transaction.** `druid_info` is UNSIGNED
   routing metadata — it never enters any signable preimage. So the normal
   one-way signer is reused unchanged; two-way adds no new crypto.
-- **Construction omits `version` and `genesis_hash`; submission adds them**
-  (`version: 2`, `fees: null`, `druid_info.genesis_hash: null`). Missing the
-  submit-time `version: 2` is the classic "swap never settles" bug.
+- **The submitted transaction carries `version: 2`; `fees` and
+  `druid_info.genesis_hash` are set to `null` at submission.** Where `version`
+  is set depends on the SDK — sdk-js bakes the two-way network version into the
+  transaction at construction and carries it through unchanged; a client that
+  builds its half without it must add it before submitting. The invariant that
+  matters is on the wire: the transaction you POST carries `version: 2`. A half
+  submitted without it is the classic "swap never settles" bug.
 - **valence `/messages` carries plaintext offers**, mailboxed by address, with
   auth headers: `address`, `public_key`, and `signature = ed25519(utf8(address))`
   (the raw address, unhashed).
 
 ## The handshake
+
+The steps (method names vary by SDK — check your SDK's two-way section):
 
 1. **Initiator** `make_2way_payment`: builds its half, persists it locally
    (encrypted), and POSTs the offer to the counterparty's valence mailbox.
