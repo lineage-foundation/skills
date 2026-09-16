@@ -13,7 +13,8 @@
     "lineage",
     "blockchain",
     "sdk",
-    "web3"
+    "web3",
+    "lineage-fundamentals"
   ],
   "skills": "./skills/"
 }
