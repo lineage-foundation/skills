@@ -4,7 +4,7 @@ A cross-tool skills library that makes an AI coding agent expert in all things L
 
 ## Skills
 
-This library contains two skill tracks:
+This library contains a shared base layer plus two skill tracks:
 
 **Base layer:**
 - **lineage-fundamentals** — The UTXO model, addresses, signing, node architecture, the /v1 API, and two-way payments. Use this first; all other skills assume it.
