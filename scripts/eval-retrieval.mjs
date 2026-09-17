@@ -14,15 +14,12 @@ export function evalRetrieval(rootDir) {
     }),
   );
   for (const q of queries) {
+    if (!Array.isArray(q.mustMention)) { errors.push(`"${q.question}": entry has no mustMention array`); continue; }
     const hay = skills.get(q.expectedSkill);
-    if (!hay) {
-      errors.push(`"${q.question}": expected skill "${q.expectedSkill}" not found`);
-      continue;
-    }
+    if (!hay) { errors.push(`"${q.question}": expected skill "${q.expectedSkill}" not found`); continue; }
     for (const fact of q.mustMention) {
-      if (!hay.includes(fact.toLowerCase())) {
-        errors.push(`"${q.question}": skill "${q.expectedSkill}" missing fact "${fact}"`);
-      }
+      const re = new RegExp(`(^|[^a-z0-9])${fact.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z0-9]|$)`);
+      if (!re.test(hay)) errors.push(`"${q.question}": skill "${q.expectedSkill}" missing fact "${fact}"`);
     }
   }
   return errors;

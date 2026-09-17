@@ -12,17 +12,14 @@ export async function runLlmEval(rootDir, callModel) {
   );
   const rows = [];
   for (const q of queries) {
-    const body = skills.get(q.expectedSkill) ?? '';
-    const answer = await callModel({
-      system: `You are a Lineage expert. Answer using only this skill:\n\n${body}`,
-      prompt: q.question,
-    });
-    const verdict = await callModel({
-      system: 'You grade answers. Reply with "PASS" or "FAIL" then a short reason. PASS only if the answer correctly covers ALL required facts and contradicts none.',
-      prompt: `Question: ${q.question}\nRequired facts: ${q.mustMention.join(', ')}\nAnswer: ${answer}`,
-    });
-    const pass = /^\s*PASS\b/i.test(verdict);
-    rows.push({ question: q.question, pass, reason: verdict.trim().slice(0, 200) });
+    try {
+      const body = skills.get(q.expectedSkill) ?? '';
+      const answer = await callModel({ system: `You are a Lineage expert. Answer using only this skill:\n\n${body}`, prompt: q.question });
+      const verdict = await callModel({ system: 'You grade answers. Reply "PASS" or "FAIL" then a short reason. PASS only if the answer covers ALL required facts and contradicts none.', prompt: `Question: ${q.question}\nRequired facts: ${q.mustMention.join(', ')}\nAnswer: ${answer}` });
+      rows.push({ question: q.question, pass: /^\s*PASS\b/i.test(verdict), reason: verdict.trim().slice(0, 200) });
+    } catch (err) {
+      rows.push({ question: q.question, pass: false, reason: `eval error: ${err.message}` });
+    }
   }
   return rows;
 }

@@ -28,3 +28,14 @@ test('fails when a mustMention fact is absent', () => {
   const root = scaffold([{ question: 'widget?', expectedSkill: 'demo', mustMention: ['flux-capacitor'] }]);
   assert.ok(evalRetrieval(root).some((e) => /flux-capacitor/.test(e)));
 });
+
+test('fact match respects word boundaries', () => {
+  const root = scaffold([{ question: 'q', expectedSkill: 'demo', mustMention: ['pin'] }]);
+  // demo body is "The widget uses a sprocket." — no standalone "pin"
+  assert.ok(evalRetrieval(root).some((e) => /pin/.test(e)));
+});
+
+test('missing mustMention is a clear error', () => {
+  const root = scaffold([{ question: 'q-no-facts', expectedSkill: 'demo' }]);
+  assert.ok(evalRetrieval(root).some((e) => /q-no-facts/.test(e)));
+});
