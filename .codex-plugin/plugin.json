@@ -18,6 +18,7 @@
     "contributing-to-lineage",
     "core-dev-workflow",
     "db-migrations",
+    "lineage-api-errors",
     "lineage-cli",
     "lineage-dev-node",
     "lineage-fundamentals",
