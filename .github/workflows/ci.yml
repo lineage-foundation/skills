@@ -23,7 +23,11 @@ jobs:
       - name: Build is reproducible (no drift between source and adapters)
         run: |
           node scripts/build.mjs
-          git diff --exit-status
+          if ! git diff --quiet; then
+            echo "Generated manifests differ from source — run 'node scripts/build.mjs' and commit the result."
+            git status --porcelain
+            exit 1
+          fi
 
   drift:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
