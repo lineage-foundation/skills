@@ -25,8 +25,8 @@ jobs:
       - name: Build is reproducible (no drift between source and adapters)
         run: |
           node scripts/build.mjs
-          if ! git diff --quiet; then
-            echo "Generated manifests differ from source — run 'node scripts/build.mjs' and commit the result."
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Generated output differs from source — run 'node scripts/build.mjs' and commit the result."
             git status --porcelain
             exit 1
           fi
