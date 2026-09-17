@@ -23,7 +23,8 @@
     "lineage-fundamentals",
     "lineage-sdk-usage",
     "lineage-two-way-payments",
-    "lineage-v1-api"
+    "lineage-v1-api",
+    "lineage-wallet-recovery"
   ],
   "skills": "./skills/"
 }

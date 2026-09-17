@@ -15,6 +15,7 @@ Skills that make an AI coding agent expert in Lineage. Each skill lives under
 - **lineage-sdk-usage** — Use when building an app that talks to Lineage in JavaScript/TypeScript, Python, Go, Rust, PHP, or Laravel — installing an SDK, creating a wallet, deriving keypairs, reading balances, or sending one-way token/item payments.
 - **lineage-two-way-payments** — Use when implementing a two-way (DRUID) atomic swap on Lineage — trading an item for tokens or item-for-item between two parties via the valence relay, or debugging why a swap does not settle.
 - **lineage-v1-api** — Use when calling a Lineage node's HTTP API directly (no SDK) — querying balances, submitting transactions, minting items, reading blocks/supply, or looking up which /v1 endpoint does what.
+- **lineage-wallet-recovery** — Use when a user asks how to back up, recover, or move a Lineage wallet — what the seed phrase vs the passphrase does, how addresses are derived, and how to re-derive the same wallet on another machine.
 
 ## This repo
 
