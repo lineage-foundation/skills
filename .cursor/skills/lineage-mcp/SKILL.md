@@ -23,7 +23,7 @@ It serves HTTP (not stdio) — connect a client to `<url>/mcp`. A distroless Doc
 
 ## Tools
 
-Reads: `health`, `version`, `get-latest-block`, `get-block`, `get-transaction`, `get-address-balance`, `get-supply`, `get-entry-by-hash`, `fetch-transactions`, and paginated `list-blocks` / `list-transactions` / `list-block-transactions` / `list-address-transactions` / `search-items`, plus `get-status`. Read tools query the explorer first and can cross-check on-chain when called with `verify`.
+Reads: `health`, `version`, `get-latest-block`, `get-block`, `get-transaction`, `get-address-balance`, `get-supply`, `get-entry-by-hash`, `fetch-transactions`, and the explorer-backed list/query tools `list-blocks`, `list-transactions`, `list-block-transactions`, `list-address-transactions`, `search-items`, and `get-status`. Read tools query the explorer first and can cross-check on-chain when called with `verify`.
 
 Wallet: `generate-seed-phrase`, `generate-keypair` (offline; deterministic when given a seed phrase), and `transfer-funds` — which spends and therefore requires a server-side `LINEAGE_SEED_PHRASE`, returning an error if it isn't set.
 
