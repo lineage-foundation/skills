@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync, cpSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { listSkills } from '../lib/skills.mjs';
@@ -13,6 +13,43 @@ const writeJson = (path, obj) => {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, JSON.stringify(obj, null, 2) + '\n');
 };
+
+// Tools that consume the Agent-Skills SKILL.md standard directly: fan-out a
+// byte-identical copy of each source skill dir into <tool>/skills/<name>/.
+const ADAPTER_SKILL_ROOTS = ['.cursor/skills', '.gemini/skills', '.opencode/skills'];
+
+function emitAgentSkillDirs(rootDir, skills) {
+  for (const rel of ADAPTER_SKILL_ROOTS) {
+    const base = join(rootDir, rel);
+    rmSync(base, { recursive: true, force: true }); // drop stale skills
+    mkdirSync(base, { recursive: true });
+    for (const s of skills) {
+      cpSync(s.dir, join(base, s.name), { recursive: true });
+    }
+  }
+}
+
+function emitAgentsMd(rootDir, skills) {
+  const lines = [
+    '# Lineage skills',
+    '',
+    'Skills that make an AI coding agent expert in Lineage. Each skill lives under',
+    '`skills/<track>/<name>/SKILL.md`; load the one that matches your task.',
+    '',
+    '## Skills',
+    '',
+    ...skills.map((s) => `- **${s.name}** — ${s.description}`),
+    '',
+    '## This repo',
+    '',
+    '- `npm run build` — regenerate tool adapters from `skills/`',
+    '- `npm run validate` — check frontmatter and sources',
+    '- `npm test` — unit tests',
+    '- `npm run eval` — deterministic retrieval/fact check',
+    '',
+  ];
+  writeFileSync(join(rootDir, 'AGENTS.md'), lines.join('\n'));
+}
 
 export function build(rootDir) {
   const skills = listSkills(join(rootDir, 'skills')).sort((a, b) =>
@@ -47,6 +84,9 @@ export function build(rootDir) {
     keywords,
     skills: './skills/',
   });
+
+  emitAgentSkillDirs(rootDir, skills);
+  emitAgentsMd(rootDir, skills);
 
   return skills;
 }
