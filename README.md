@@ -15,6 +15,12 @@ This library contains two skill tracks:
 - **lineage-v1-api** — Calling a Lineage node's HTTP API directly: querying balances, submitting transactions, minting items, reading blocks.
 - **lineage-dev-node** — Standing up a local fleet stack with Docker or pointing at the public testnet.
 
+**Core-contributing track:**
+- **contributing-to-lineage** — Orientation: the fleet/prime crate map, node roles, and how a block flows.
+- **core-dev-workflow** — Build/test loop, the fleet-integration suite, running a local/multi-node stack, and repo conventions.
+- **consensus-safety** — Changing RAFT/consensus code without stalling mining or forking the chain.
+- **db-migrations** — Versioned column families and the fleet upgrade machinery; never relabel in place.
+
 ## Install
 
 ### Claude Code
