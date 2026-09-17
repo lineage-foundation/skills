@@ -13,7 +13,7 @@ description: Use when building, testing, or running the Lineage node (the fleet 
 
 ## A chain to develop against
 
-Stand up a local mempool/storage/miner stack with Docker Compose from this repo (see the README for the compose setup and ports), then point your client or tests at the local hosts — the `/v1` API is identical to testnet. For an SDK-side dev loop, see the build-on-Lineage `lineage-dev-node` skill.
+Stand up a local mempool/storage/miner stack with Docker Compose from the fleet repo (see the README for the compose setup and ports), then point your client or tests at the local hosts — the `/v1` API is identical to testnet. For an SDK-side dev loop, see the build-on-Lineage `lineage-dev-node` skill.
 
 ## Operating a cluster
 
@@ -24,7 +24,7 @@ Production runs the same binaries multi-node (e.g. Railway + Docker). Two operat
 
 ## Conventions
 
-- Rust 2021, a single Cargo workspace. Follow the existing crate boundaries; don't restructure across crates without cause.
+- Rust 2021, a single Cargo workspace (the vendored prime crate is still edition 2018). Follow the existing crate boundaries; don't restructure across crates without cause.
 - PRs branch off `main`, stay scoped, and run the relevant crate tests plus `fleet-integration` for consensus-adjacent work.
 - No AI-authorship signals in commits or PRs — no "Generated with", no Co-Authored-By trailers. Repo work reads as hand-written.
 
