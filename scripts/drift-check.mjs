@@ -7,8 +7,12 @@ export async function checkDrift(registry, fetchSha) {
   const rows = [];
   for (const s of registry.sources) {
     if (!s.repo) continue; // url-only sources have no commit to compare
-    const latest = await fetchSha(s.repo);
-    rows.push({ id: s.id, pin: s.pin, latest, stale: latest !== s.pin });
+    try {
+      const latest = await fetchSha(s.repo);
+      rows.push({ id: s.id, pin: s.pin, latest, stale: latest !== s.pin });
+    } catch (err) {
+      rows.push({ id: s.id, pin: s.pin, error: err.message });
+    }
   }
   return rows;
 }
@@ -23,6 +27,13 @@ if (isMain) {
     }).trim();
   const rows = await checkDrift(registry, fetchSha);
   const stale = rows.filter((r) => r.stale);
+  const errors = rows.filter((r) => r.error);
   for (const r of stale) console.log(`STALE ${r.id}: pinned ${r.pin.slice(0, 7)} -> latest ${r.latest.slice(0, 7)}`);
-  console.log(stale.length ? `\n${stale.length} source(s) drifted; review skills that cite them.` : 'drift-check: all pins current.');
+  for (const r of errors) console.log(`ERROR ${r.id}: ${r.error}`);
+  if (stale.length || errors.length) {
+    console.log(`\n${stale.length} source(s) drifted${errors.length ? `, ${errors.length} source(s) failed` : ''}; review skills that cite them.`);
+    process.exit(1);
+  } else {
+    console.log('drift-check: all pins current.');
+  }
 }
