@@ -17,6 +17,11 @@
     { "id": "fleet-mempool-raft", "repo": "lineage-foundation/fleet", "path": "crates/fleet-mempool/src/mempool_raft.rs", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "" },
     { "id": "fleet-core-raft", "repo": "lineage-foundation/fleet", "path": "crates/fleet-core/src/raft.rs", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "" },
     { "id": "fleet-upgrade", "repo": "lineage-foundation/fleet", "path": "crates/fleet/src/upgrade/mod.rs", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "" },
-    { "id": "fleet-db-columns", "repo": "lineage-foundation/fleet", "path": "crates/fleet-core/src/constants.rs", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "DB_COLS_BC" }
+    { "id": "fleet-db-columns", "repo": "lineage-foundation/fleet", "path": "crates/fleet-core/src/constants.rs", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "DB_COLS_BC" },
+    { "id": "cli-readme", "repo": "lineage-foundation/cli", "path": "README.md", "pin": "7c627f6fad67ed5d4a32d36194f65c347491a8d8", "anchor": "Commands" },
+    { "id": "mcp-readme", "repo": "lineage-foundation/mcp", "path": "README.md", "pin": "0029f9598f5472c38531820e33b9b325ebd9bb83", "anchor": "Tools" },
+    { "id": "sdk-js-keymgmt", "repo": "lineage-foundation/sdk-js", "path": "src/mgmt/key.mgmt.ts", "pin": "6cde5f2bb7d355941a2d1b9cfeb2cc2f09d43f87", "anchor": "generateMasterKey" },
+    { "id": "sdk-js-errors", "repo": "lineage-foundation/sdk-js", "path": "src/interfaces/error.interfaces.ts", "pin": "6cde5f2bb7d355941a2d1b9cfeb2cc2f09d43f87", "anchor": "IErrorInternal" },
+    { "id": "fleet-api-errors", "repo": "lineage-foundation/fleet", "path": "crates/fleet-api/src/error.rs", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "ApiProblem" }
   ]
 }
