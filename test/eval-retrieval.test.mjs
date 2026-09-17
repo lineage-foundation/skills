@@ -30,8 +30,18 @@ test('fails when a mustMention fact is absent', () => {
 });
 
 test('fact match respects word boundaries', () => {
-  const root = scaffold([{ question: 'q', expectedSkill: 'demo', mustMention: ['pin'] }]);
-  // demo body is "The widget uses a sprocket." — no standalone "pin"
+  const root = mkdtempSync(join(tmpdir(), 'ev-'));
+  mkdirSync(join(root, 'skills/demo'), { recursive: true });
+  writeFileSync(
+    join(root, 'skills/demo/SKILL.md'),
+    '---\nname: demo\ndescription: In my opinion this matters.\n---\nThis is my opinion about spinning widgets.',
+  );
+  mkdirSync(join(root, 'evals'), { recursive: true });
+  writeFileSync(
+    join(root, 'evals/queries.json'),
+    JSON.stringify({ queries: [{ question: 'q', expectedSkill: 'demo', mustMention: ['pin'] }] }),
+  );
+  // "pin" is a substring of "opinion"/"spinning" but not a standalone word -> must be reported missing
   assert.ok(evalRetrieval(root).some((e) => /pin/.test(e)));
 });
 
