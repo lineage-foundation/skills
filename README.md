@@ -79,13 +79,13 @@ Guidelines:
 - The `description` field should be specific and action-oriented; the agent uses it to decide when to retrieve the skill.
 - All factual claims must cite canonical sources by id in a `## Sources` footer (one id per line).
 - Add any new source to `sources/sources.json` with a pinned commit and anchor (see the file for the format).
-- Never hand-edit the generated `.claude-plugin/` or `.codex-plugin/` directories — the build owns them.
+- Never hand-edit the generated `.claude-plugin/`, `.codex-plugin/`, `.cursor/skills/`, `.gemini/skills/`, `.opencode/skills/`, or `AGENTS.md` — the build owns them.
 
 Then validate and build:
 
 ```bash
 npm run validate  # Check SKILL.md frontmatter and source ids
-npm run build     # Generate .claude-plugin/ and .codex-plugin/ manifests
+npm run build     # Generate .claude-plugin/, .codex-plugin/, per-tool skill adapters (.cursor/, .gemini/, .opencode/), and AGENTS.md
 npm test          # Run the test suite
 ```
 
