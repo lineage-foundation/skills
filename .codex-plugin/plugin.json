@@ -17,6 +17,7 @@
     "consensus-safety",
     "contributing-to-lineage",
     "core-dev-workflow",
+    "db-migrations",
     "lineage-dev-node",
     "lineage-fundamentals",
     "lineage-sdk-usage",
