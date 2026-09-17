@@ -13,7 +13,7 @@ Each node role serves its own host (see `lineage-fundamentals`).
 
 - `POST /v1/balances/query` — balances for a list of addresses.
 - `POST /v1/transactions` — submit a signed transaction.
-- `POST /v1/payments` — node-side payment (also the testnet faucet route).
+- `POST /v1/payments` — node-side payment.
 - `POST /v1/items` — mint an item asset.
 - `GET  /v1/supply` — token supply.
 - `POST /v1/blockchain-entries/query`, `GET /v1/blocks`, `GET /v1/blocks/latest`,
