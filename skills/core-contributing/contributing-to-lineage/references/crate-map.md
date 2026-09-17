@@ -9,7 +9,7 @@
 | fleet-storage | Storage node + RAFT group (`storage_raft.rs`): block persistence, reads |
 | fleet-api | Public `/v1` HTTP surface |
 | fleet-node-common | Shared node helpers |
-| fleet-user | User/auth |
+| fleet-user | User node: client-facing /v1 node (holds keys; payments, item creation) |
 | fleet-wallet | Node wallet |
 | fleet-integration | Cross-node integration tests |
 | prime | Chain primitives: crypto, script, tx/DRUID utils, constants |

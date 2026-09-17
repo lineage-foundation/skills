@@ -15,13 +15,14 @@ Lineage's node is the `fleet` Cargo workspace (Rust) plus the `prime` chain-prim
 - **fleet-miner** — proof-of-work mining.
 - **fleet-storage** — the storage node and its RAFT group (`storage_raft.rs`): block persistence and blockchain-entry reads.
 - **fleet-api** — the public `/v1` HTTP surface (endpoints are covered by the build-on-Lineage `lineage-v1-api` skill).
-- **fleet-node-common / fleet-user / fleet-wallet** — shared node helpers, user/auth, and node wallet.
+- **fleet-user** — the user node: a client-facing node that holds keys and serves `/v1` (payments, item creation).
+- **fleet-node-common / fleet-wallet** — shared node helpers and node wallet.
 - **fleet-integration** — cross-node integration tests.
 - **prime** — chain primitives: crypto, script, transaction/DRUID utils, constants. The rules the whole network agrees on.
 
 ## Node roles and block flow
 
-Three node roles, each its own process/host: **mempool** (accepts transactions, coordinates mining via RAFT), **miner** (solves proof-of-work), **storage** (persists mined blocks, serves reads). A block flows: transaction intake at a mempool node -> replicated across the mempool RAFT group -> a mining round produces a block -> the block is committed to storage.
+`cargo build --release` produces one binary per node type: **mempool**, **storage**, **miner**, **user**, and **pre_launch** (plus the `upgrade` helper). Three of these are the consensus/mining roles: mempool (accepts transactions, coordinates mining via RAFT), miner (solves proof-of-work), and storage (persists mined blocks, serves reads). A **user** node is client-facing — it holds keys and serves `/v1` (payments, item creation); **pre_launch** is a one-shot bootstrap helper. A block flows: transaction intake at a mempool node -> replicated across the mempool RAFT group -> a mining round produces a block -> the block is committed to storage.
 
 ## Where to go next
 
