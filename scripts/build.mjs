@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync, rmSync, cpSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync, cpSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { listSkills } from '../lib/skills.mjs';
@@ -8,6 +8,7 @@ const VERSION = '0.1.0';
 const DESCRIPTION =
   'Expertise for building on Lineage: the SDKs, the /v1 API, two-way (DRUID) payments, valence, and running a node to develop against.';
 const REPO = 'https://github.com/lineage-foundation/skills';
+const NAME_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 const writeJson = (path, obj) => {
   mkdirSync(dirname(path), { recursive: true });
@@ -21,10 +22,15 @@ const ADAPTER_SKILL_ROOTS = ['.cursor/skills', '.gemini/skills', '.opencode/skil
 function emitAgentSkillDirs(rootDir, skills) {
   for (const rel of ADAPTER_SKILL_ROOTS) {
     const base = join(rootDir, rel);
-    rmSync(base, { recursive: true, force: true }); // drop stale skills
+    rmSync(base, { recursive: true, force: true });
     mkdirSync(base, { recursive: true });
     for (const s of skills) {
-      cpSync(s.dir, join(base, s.name), { recursive: true });
+      if (!NAME_RE.test(s.name)) throw new Error(`invalid skill name "${s.name}"`);
+      const dest = join(base, s.name);
+      mkdirSync(dest, { recursive: true });
+      cpSync(join(s.dir, 'SKILL.md'), join(dest, 'SKILL.md'));
+      const refs = join(s.dir, 'references');
+      if (existsSync(refs)) cpSync(refs, join(dest, 'references'), { recursive: true });
     }
   }
 }

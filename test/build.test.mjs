@@ -91,3 +91,22 @@ test('build removes stale adapter skills when a source skill is gone', () => {
   assert.ok(!existsSync(join(root, '.cursor/skills/beta')), 'stale beta removed');
   assert.ok(existsSync(join(root, '.cursor/skills/alpha/SKILL.md')), 'alpha kept');
 });
+
+test('build rejects a traversal name', () => {
+  const root = mkdtempSync(join(tmpdir(), 'bt-'));
+  mkdirSync(join(root, 'skills/evil'), { recursive: true });
+  writeFileSync(join(root, 'skills/evil/SKILL.md'), '---\nname: ../../pwned\ndescription: d\n---\nx');
+  assert.throws(() => build(root), /invalid skill name/i);
+});
+
+test('build fan-out copies only SKILL.md and references/', () => {
+  const root = mkdtempSync(join(tmpdir(), 'ba-'));
+  mkdirSync(join(root, 'skills/demo/references'), { recursive: true });
+  writeFileSync(join(root, 'skills/demo/SKILL.md'), '---\nname: demo\ndescription: d\n---\nx');
+  writeFileSync(join(root, 'skills/demo/references/n.md'), '# n');
+  writeFileSync(join(root, 'skills/demo/.DS_Store'), 'junk');
+  build(root);
+  assert.ok(existsSync(join(root, '.cursor/skills/demo/SKILL.md')));
+  assert.ok(existsSync(join(root, '.cursor/skills/demo/references/n.md')));
+  assert.ok(!existsSync(join(root, '.cursor/skills/demo/.DS_Store')), 'stray file not copied');
+});
