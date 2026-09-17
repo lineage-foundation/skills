@@ -8,6 +8,12 @@
     { "question": "Where do I find each subsystem in the fleet codebase?", "expectedSkill": "contributing-to-lineage", "mustMention": ["fleet-core", "fleet-mempool", "prime", "node type"] },
     { "question": "How do I build and run the fleet integration tests?", "expectedSkill": "core-dev-workflow", "mustMention": ["cargo test", "fleet-integration"] },
     { "question": "How do I change RAFT code without forking the chain?", "expectedSkill": "consensus-safety", "mustMention": ["replicated", "deterministic", "trust_advertised_peer_address"] },
-    { "question": "How do I add a database migration to fleet?", "expectedSkill": "db-migrations", "mustMention": ["db_cols_bc", "upgrade", "never relabel"] }
+    { "question": "How do I add a database migration to fleet?", "expectedSkill": "db-migrations", "mustMention": ["db_cols_bc", "upgrade", "never relabel"] },
+    { "question": "How do I check my balance from the terminal?", "expectedSkill": "lineage-cli", "mustMention": ["lineage", "balance", "profile"] },
+    { "question": "I lost my wallet passphrase — can I recover from the seed phrase?", "expectedSkill": "lineage-wallet-recovery", "mustMention": ["seed phrase", "passphrase", "derive"] },
+    { "question": "My transaction submission returned a 500 — should I retry?", "expectedSkill": "lineage-api-errors", "mustMention": ["500", "retry", "detail"] },
+    { "question": "Is there an MCP server for Lineage and what tools does it expose?", "expectedSkill": "lineage-mcp", "mustMention": ["mcp", "http", "transfer-funds"] },
+    { "question": "My two-way swap never settles — what's wrong?", "expectedSkill": "lineage-two-way-payments", "mustMention": ["version", "settle"] },
+    { "question": "How do I mint a new item asset via the HTTP API?", "expectedSkill": "lineage-v1-api", "mustMention": ["/v1/items"] }
   ]
 }
