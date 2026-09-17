@@ -20,6 +20,8 @@ jobs:
         run: node --test
       - name: Validate skills + sources
         run: node scripts/validate.mjs
+      - name: Retrieval/fact eval
+        run: node scripts/eval-retrieval.mjs
       - name: Build is reproducible (no drift between source and adapters)
         run: |
           node scripts/build.mjs
