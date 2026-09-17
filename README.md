@@ -14,6 +14,10 @@ This library contains a shared base layer plus two skill tracks:
 - **lineage-two-way-payments** — Implementing atomic swaps (DRUID) between two parties via the valence relay.
 - **lineage-v1-api** — Calling a Lineage node's HTTP API directly: querying balances, submitting transactions, minting items, reading blocks.
 - **lineage-dev-node** — Standing up a local fleet stack with Docker or pointing at the public testnet.
+- **lineage-cli** — Using the `lineage` command-line client: checking balances, sending payments, managing wallets, and reading blocks.
+- **lineage-wallet-recovery** — Backing up and recovering a wallet: managing seed phrases and passphrases, re-deriving across machines.
+- **lineage-api-errors** — Interpreting API and SDK errors: terminal vs retriable failures.
+- **lineage-mcp** — Running the Lineage MCP server and using its exposed tools.
 
 **Core-contributing track:**
 - **contributing-to-lineage** — Orientation: the fleet/prime crate map, node roles, and how a block flows.
