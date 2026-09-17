@@ -1,0 +1,13 @@
+{
+  "queries": [
+    { "question": "What is Lineage and what asset types does it have?", "expectedSkill": "lineage-fundamentals", "mustMention": ["utxo", "token", "item", "sha3"] },
+    { "question": "How do I install an SDK and send a one-way payment?", "expectedSkill": "lineage-sdk-usage", "mustMention": ["npm install", "pip install", "wallet", "payment"] },
+    { "question": "How do I run a two-way item-for-LNGX atomic swap?", "expectedSkill": "lineage-two-way-payments", "mustMention": ["druid", "valence", "accept", "settle"] },
+    { "question": "How do I call the node HTTP API directly to query balances?", "expectedSkill": "lineage-v1-api", "mustMention": ["/v1/balances/query", "openapi"] },
+    { "question": "How do I get a local chain to develop against and fund a wallet?", "expectedSkill": "lineage-dev-node", "mustMention": ["docker", "testnet", "faucet"] },
+    { "question": "Where do I find each subsystem in the fleet codebase?", "expectedSkill": "contributing-to-lineage", "mustMention": ["fleet-core", "fleet-mempool", "prime", "node type"] },
+    { "question": "How do I build and run the fleet integration tests?", "expectedSkill": "core-dev-workflow", "mustMention": ["cargo test", "fleet-integration"] },
+    { "question": "How do I change RAFT code without forking the chain?", "expectedSkill": "consensus-safety", "mustMention": ["replicated", "deterministic", "trust_advertised_peer_address"] },
+    { "question": "How do I add a database migration to fleet?", "expectedSkill": "db-migrations", "mustMention": ["db_cols_bc", "upgrade", "never relabel"] }
+  ]
+}

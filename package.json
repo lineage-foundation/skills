@@ -10,6 +10,7 @@
     "build": "node scripts/build.mjs",
     "validate": "node scripts/validate.mjs",
     "drift": "node scripts/drift-check.mjs",
+    "eval": "node scripts/eval-retrieval.mjs",
     "test": "node --test"
   },
   "author": { "name": "Lineage Foundation", "email": "info@lineage.foundation" }
