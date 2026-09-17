@@ -1,6 +1,6 @@
 ---
 name: lineage-dev-node
-description: Use when you need a Lineage chain to develop against — standing up a local fleet stack with Docker, or pointing at the public testnet and getting a test wallet funded with LNGX.
+description: Use when you (building an app/client on Lineage) need a chain to develop against — a local fleet stack via Docker or the public testnet. For running the node codebase's own build/test suite, see core-dev-workflow.
 ---
 
 # A chain to develop against

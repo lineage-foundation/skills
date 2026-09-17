@@ -1,6 +1,6 @@
 ---
 name: core-dev-workflow
-description: Use when building, testing, or running the Lineage node (the fleet workspace) — cargo build/test, the fleet-integration suite, standing up a local multi-node stack, operating a cluster, or following the repo's contribution conventions.
+description: Use when building/testing the Lineage node codebase itself (cargo, the fleet-integration suite) or operating a cluster. For an SDK/app-side dev loop against a local or testnet chain, see lineage-dev-node.
 ---
 
 # Core dev workflow
@@ -17,10 +17,7 @@ Stand up a local mempool/storage/miner stack with Docker Compose from the fleet 
 
 ## Operating a cluster
 
-Production runs the same binaries multi-node (e.g. Railway + Docker). Two operational facts bite first-timers, both rooted in consensus (see `consensus-safety` for the why):
-
-- Quorum on source-NAT networks depends on the `trust_advertised_peer_address` node-config flag — without it a multi-node cluster may never form quorum or mint.
-- Every mempool node must run with a miner, or mining stalls.
+Production runs the same binaries multi-node (e.g. Railway + Docker) — a multi-node cluster needs `trust_advertised_peer_address` enabled and a miner per mempool node; see `consensus-safety` for why.
 
 ## Conventions
 
