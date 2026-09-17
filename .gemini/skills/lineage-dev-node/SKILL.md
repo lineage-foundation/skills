@@ -16,9 +16,7 @@ Point your SDK/config at these hosts:
 - miner — `https://miner.lineage.to`
 - valence — `https://valence.lineage.to`
 
-**Fund a test wallet from the faucet:** `POST https://miner.lineage.to/v1/payments`
-with `{"kind":"address","address":"<addr>","amount":<n>,"passphrase":""}`. The
-tokens land after the next block; poll the balance until they appear.
+**Fund a test wallet.** There is no public faucet. Generate an address, then either send it to the team to be seeded, or — if you run your own node — request tokens from a funded peer with `POST /v1/donation-requests`. Poll the balance until they land.
 
 ## Local stack
 

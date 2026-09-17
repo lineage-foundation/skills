@@ -20,7 +20,7 @@ task-specific skills below assume it.
   outpoint; you sign exactly what you submit (field order is load-bearing).
 - **Nodes are split by role**, each its own process/host. `mempool` accepts
   transactions and answers balance queries; `storage` serves blocks and
-  blockchain entries; `miner` mines blocks (and on testnet exposes a faucet); a
+  blockchain entries; `miner` mines blocks; a
   `user` node is client-facing (holds keys, serves `/v1`); `pre_launch` is a
   one-shot bootstrap helper with no HTTP API.
 - **The public API is `/v1`** on those hosts. See `lineage-v1-api`.
