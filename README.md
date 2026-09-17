@@ -38,6 +38,22 @@ This library contains a shared base layer plus two skill tracks:
 
 Use the generated `.codex-plugin/` directory to register the plugin in your Codex instance. See the Codex plugin documentation for the setup steps specific to your environment.
 
+### Cursor
+
+The repo's `.cursor/skills/` directory is auto-discovered when you open the repository in Cursor. Skills are made available automatically in the agent.
+
+### Gemini CLI
+
+The `.gemini/skills/` directory is picked up as workspace skills by the Gemini CLI. Skills are available in tool calls during agent sessions.
+
+### opencode
+
+The `.opencode/skills/` directory is discovered automatically. Skills are available for use within opencode sessions.
+
+### Other agents (AGENTS.md)
+
+Tools that read the `AGENTS.md` index (Codex, Copilot, Aider, Zed, and similar agents) can discover skills from the root `AGENTS.md` file. This index lists all available skills and their descriptions.
+
 ## Authoring a skill
 
 Add a new skill by creating a `SKILL.md` under `skills/` with this structure:
@@ -84,3 +100,32 @@ npm run drift
 ```
 
 This command checks each source in `sources/sources.json` and reports any whose upstream repository has commits newer than the pinned commit — i.e., the pin is behind the source's latest default-branch HEAD. A STALE report means the source has moved on since it was pinned, so the skills citing it should be reviewed and the pin updated (re-pinned) if the content still matches.
+
+## Evals
+
+Skills are evaluated for correctness and retrieval fit using a deterministic suite and an optional LLM grader.
+
+### Deterministic retrieval check
+
+```bash
+npm run eval
+```
+
+This runs a deterministic fact-check on all skills against the golden dataset in `evals/queries.json`. It verifies that the retrieval system correctly identifies the skill that should answer each query. This check runs automatically in CI on every push and must pass before a skill is merged.
+
+### LLM eval (on-demand)
+
+```bash
+npm run eval:llm
+```
+
+This runs an on-demand Haiku-graded evaluation suite that tests whether skills correctly answer their queries. It requires the `ANTHROPIC_API_KEY` environment variable. The same evaluation is also available via the GitHub Actions workflow `LLM eval` (under Actions > Workflows, use "Run workflow" with `workflow_dispatch`).
+
+### Adding skills to the dataset
+
+When you add a new skill, add entries to `evals/queries.json` with:
+- `question`: A question that the skill should answer
+- `expectedSkill`: The skill name (must match the directory in `skills/`)
+- `mustMention`: An array of required terms or phrases that the skill must include in its answer
+
+This ensures new skills are covered in both the deterministic and LLM evaluation pipelines.
