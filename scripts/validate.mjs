@@ -4,9 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { listSkills, parseFrontmatter } from '../lib/skills.mjs';
 
 function sourceIdsInBody(body) {
-  const idx = body.indexOf('## Sources');
-  if (idx === -1) return [];
-  let tail = body.slice(idx + '## Sources'.length);
+  const start = body.search(/^##\s+Sources\s*$/m);
+  if (start === -1) return [];
+  let tail = body.slice(start);
+  tail = tail.slice(tail.indexOf('\n') + 1); // drop the heading line
   const next = tail.search(/^##\s/m);
   if (next !== -1) tail = tail.slice(0, next);
   return [...tail.matchAll(/^\s*[-*]\s*([A-Za-z0-9_-]+)/gm)].map((m) => m[1]);

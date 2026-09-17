@@ -66,3 +66,10 @@ test('duplicate skill names is an error', () => {
   );
   assert.ok(validate(root).some((e) => /duplicate/.test(e)));
 });
+
+test('validate anchors on the real ## Sources, not ### Sources', () => {
+  const root = scaffold({ sourcesLine: '- x', srcIds: ['x'] });
+  writeFileSync(join(root, 'skills/demo/SKILL.md'),
+    '---\nname: demo\ndescription: d\n---\n### Sources\n- decorative\n\n## Sources\n- bogus-id\n');
+  assert.ok(validate(root).some((e) => /bogus-id/.test(e)));
+});

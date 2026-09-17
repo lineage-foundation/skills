@@ -18,6 +18,16 @@ test('parseFrontmatter throws without closing fence', () => {
   assert.throws(() => parseFrontmatter('---\nname: x\nno close\n'));
 });
 
+test('parseFrontmatter handles CRLF line endings', () => {
+  const { attrs } = parseFrontmatter('---\r\nname: demo\r\ndescription: Use it.\r\n---\r\nBody\r\n');
+  assert.equal(attrs.name, 'demo');
+  assert.equal(attrs.description, 'Use it.');
+});
+
+test('parseFrontmatter rejects block-scalar description', () => {
+  assert.throws(() => parseFrontmatter('---\nname: demo\ndescription: |\n  multi\n  line\n---\nx'), /block scalar|multi-line/i);
+});
+
 test('listSkills finds nested SKILL.md files', () => {
   const root = mkdtempSync(join(tmpdir(), 'sk-'));
   mkdirSync(join(root, 'a/b'), { recursive: true });
