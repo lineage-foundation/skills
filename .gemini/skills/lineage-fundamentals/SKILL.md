@@ -18,10 +18,11 @@ task-specific skills below assume it.
   BIP39 mnemonic; addresses derive via BIP32.
 - **Signing.** You sign a hash over the transaction's outputs plus the previous
   outpoint; you sign exactly what you submit (field order is load-bearing).
-- **Nodes are split by role, each on its own host and HTTP API:**
-  - **mempool** — accepts transactions and payments, answers balance queries.
-  - **storage** — serves blocks and blockchain entries.
-  - **miner** — mines blocks; on testnet also exposes a faucet.
+- **Nodes are split by role**, each on its own host and HTTP API. `mempool`
+  accepts transactions and answers balance queries; `storage` serves blocks and
+  blockchain entries; `miner` mines blocks (and on testnet exposes a faucet); a
+  `user` node is client-facing (holds keys, serves `/v1`); `pre_launch` is a
+  one-shot bootstrap helper. The public API is `/v1` on those hosts.
 - **The public API is `/v1`** on those hosts. See `lineage-v1-api`.
 - **Two-way (DRUID) payments** are atomic swaps between two parties, routed
   through the **valence** relay. See `lineage-two-way-payments`.
