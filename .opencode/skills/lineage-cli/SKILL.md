@@ -17,7 +17,7 @@ cargo install --git https://github.com/lineage-foundation/cli lineage-cli
 
 ## Configuration
 
-On first run it scaffolds `~/.config/lineage/config.toml` with two profiles: `testnet` (node-side signer, the default) and `local` (local signer, wallet at `~/.lineage/wallet.json`), both pointing at `mempool/storage/miner.lineage.to`. Select with `--profile`, override hosts with `--network testnet|<url>`, and pass an API key via the profile's `api_key`. The wallet passphrase is never prompted — set `LINEAGE_PASSPHRASE` or store it in the OS keyring (service `lineage`).
+On first run it scaffolds `~/.config/lineage/config.toml` (on macOS, `~/Library/Application Support/lineage/config.toml`) with two profiles: `testnet` (node-side signer, the default) and `local` (local signer, wallet at `~/.lineage/wallet.json`), both pointing at `mempool/storage/miner.lineage.to`. Select with `--profile`, override hosts with `--network testnet|<url>`, and pass an API key via the profile's `api_key`. The wallet passphrase is never prompted — set `LINEAGE_PASSPHRASE` or store it in the OS keyring (service `lineage`).
 
 ## Common commands
 
@@ -38,7 +38,7 @@ Global flags: `--json --yes --dry-run --profile --network --quiet`.
 
 ## Gotchas
 
-- Any `wallet` command needs a local-signer profile (`--profile local`) or it errors "no wallet_path configured".
+- The `wallet new`/`address`/`list` commands need a local-signer profile (`--profile local`) or they error `profile has no wallet_path configured`; `wallet import`/`passphrase`/`refresh` act on a node's wallet (via `--node`) and work on the default profile.
 - Writes (`pay`, `items`, `tx submit`, `donate`) require `--yes` (or `confirm = "auto"`); `pay` also enforces the profile's allowlist/max-amount/daily-cap guardrails.
 - Exit codes are stable: 0 ok, 1 runtime error, 2 usage, 3 guardrail-denied, 4 node unreachable.
 
