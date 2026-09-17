@@ -17,7 +17,8 @@ Mempool and storage nodes run RAFT groups. State that is RAFT-replicated must be
 
 - **One miner per mempool node.** Multi-mempool mining stalls unless every mempool node has a miner attached — the intake-close predicate depends on it. If you touch intake or round-close, preserve this invariant.
 - **`trust_advertised_peer_address` for quorum.** On source-NAT networks (e.g. Railway), a multi-node cluster only forms quorum and mints when peers trust the advertised peer address; the flag lives in node configuration. Don't assume peers are directly addressable.
-- **Mid-round eviction/re-selection must stay consensus-safe.** Block-producer re-selection replaced a fragile count-to-5 scheme; any change to mid-round selection must remain deterministic across the group.
+- **Dropped-miner re-selection must stay consensus-safe.** When a selected miner disconnects mid-round, the group evicts it by majority vote and deterministically re-selects the round ("Pipeline re-select"). Any change to that path must remain deterministic across the group.
+- **The stuck-round watchdog replaced the old count-to-5 reset.** A connected-but-idle round is reset by a tick-based progress watchdog ("Pipeline reset", `POW_PROGRESS_WATCHDOG_TICKS`), which replaced the earlier trigger-message counter. Both paths (re-select for drops, reset for stalls) exist and are consensus-critical — don't conflate them.
 
 ## Review lens
 
