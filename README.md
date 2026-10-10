@@ -13,6 +13,7 @@ This library contains a shared base layer plus two skill tracks:
 - **lineage-sdk-usage** — Installing an SDK (JavaScript, Python, Go, Rust, PHP, Laravel), creating a wallet, deriving keypairs, reading balances, and sending one-way payments.
 - **lineage-two-way-payments** — Implementing atomic swaps (DRUID) between two parties via the valence relay.
 - **lineage-v1-api** — Calling a Lineage node's HTTP API directly: querying balances, submitting transactions, minting items, reading blocks.
+- **lineage-explorer** — Reading indexed chain data from the explorer's REST API (address history, item holders and transfers, settled trades), and working on or deploying the explorer.
 - **lineage-dev-node** — Standing up a local fleet stack with Docker or pointing at the public testnet.
 - **lineage-cli** — Using the `lineage` command-line client: checking balances, sending payments, managing wallets, and reading blocks.
 - **lineage-wallet-recovery** — Backing up and recovering a wallet: managing seed phrases and passphrases, re-deriving across machines.
