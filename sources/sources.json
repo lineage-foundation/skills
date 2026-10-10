@@ -24,6 +24,9 @@
     { "id": "sdk-js-errors", "repo": "lineage-foundation/sdk-js", "path": "src/interfaces/error.interfaces.ts", "pin": "6cde5f2bb7d355941a2d1b9cfeb2cc2f09d43f87", "anchor": "IErrorInternal" },
     { "id": "fleet-api-errors", "repo": "lineage-foundation/fleet", "path": "crates/fleet-api/src/error.rs", "pin": "43ff617ab893243182e8eebc243191fb47fc7089", "anchor": "ApiProblem" },
     { "id": "fleet-mempool-druid-pool", "repo": "lineage-foundation/fleet", "path": "crates/fleet-mempool/src/lib.rs", "pin": "1d0ac8d8447d431a31f68d55562dcfac45edc0d3", "anchor": "validate_dde_txs" },
-    { "id": "fleet-druid-expectations", "repo": "lineage-foundation/fleet", "path": "crates/prime/src/utils/druid_utils.rs", "pin": "1d0ac8d8447d431a31f68d55562dcfac45edc0d3", "anchor": "druid_expectations_are_met" }
+    { "id": "fleet-druid-expectations", "repo": "lineage-foundation/fleet", "path": "crates/prime/src/utils/druid_utils.rs", "pin": "1d0ac8d8447d431a31f68d55562dcfac45edc0d3", "anchor": "druid_expectations_are_met" },
+    { "id": "explorer-readme", "repo": "lineage-foundation/explorer", "path": "README.md", "pin": "b9ab16e0493d70596736e5b99a8c63ecc9f4768c", "anchor": "Deployment" },
+    { "id": "explorer-api-items", "repo": "lineage-foundation/explorer", "path": "packages/api/src/routes/items.ts", "pin": "b9ab16e0493d70596736e5b99a8c63ecc9f4768c", "anchor": "/api/v1/items/{genesis}" },
+    { "id": "fleet-item-genesis", "repo": "lineage-foundation/fleet", "path": "crates/prime/src/primitives/asset.rs", "pin": "1d0ac8d8447d431a31f68d55562dcfac45edc0d3", "anchor": "genesis_hash" }
   ]
 }

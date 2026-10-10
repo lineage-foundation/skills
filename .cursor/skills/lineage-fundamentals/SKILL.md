@@ -14,6 +14,11 @@ task-specific skills below assume it.
 - **Assets are one of two kinds.** `Token` — the native asset, LNGX, an integer
   amount. `Item` — a distinct on-chain asset identified by a `genesis_hash`,
   with an `amount` and optional `metadata`.
+- **An item's id is the hash of the transaction that created it.** The
+  creation output has an empty `genesis_hash` and carries the `metadata`;
+  every later output of that item carries the `genesis_hash` and no metadata.
+  So to identify an item output use `genesis_hash`, falling back to the
+  transaction's own hash, and read metadata from the creation output only.
 - **Addresses** are `hex(sha3_256(public_key))`. Keys are ed25519. A wallet is a
   BIP39 mnemonic; addresses derive via BIP32.
 - **Signing.** You sign a hash over the transaction's outputs plus the previous
@@ -32,6 +37,8 @@ task-specific skills below assume it.
 - Building an app? Use an SDK (`lineage-sdk-usage`) — don't hand-roll signing.
 - Need an endpoint the SDK doesn't wrap? Call `/v1` directly (`lineage-v1-api`).
 - Need a chain to develop against? `lineage-dev-node`.
+- Need history or a reverse lookup (an address's transactions, an item's
+  holders, settled trades)? Nodes don't index that; `lineage-explorer` does.
 
 See `references/repo-map.md` for which repo owns what, and
 `references/glossary.md` for terms.
@@ -39,3 +46,4 @@ See `references/repo-map.md` for which repo owns what, and
 ## Sources
 - whitepaper
 - fleet-readme
+- fleet-item-genesis
