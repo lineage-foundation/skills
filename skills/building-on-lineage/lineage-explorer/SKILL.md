@@ -27,17 +27,18 @@ a shape.
   `/addresses/{address}/items`.
 - `GET /items?q=` or `?genesis=` (one is required), `/items/{genesis}`,
   `/items/{genesis}/transfers`.
-- `GET /swaps`, `/swaps/{druid}` — settled two-way payments.
+- `GET /trades`, `/trades/{druid}` — settled two-way payments.
 
 `/status` reports the height the indexer has reached, which can trail the chain
 tip by a block. Compare it with the node before treating data as missing.
 
 ## Words
 
-- The website calls a settled two-way (DRUID) payment a **trade**, at
-  `/trade/{druid}`. The API paths call the same thing a **swap**. Trade and
-  swap are one concept; see `lineage-two-way-payments` for how one is built
-  and read.
+- The explorer calls a settled two-way (DRUID) payment a **trade**: the page
+  is `/trade/{druid}` and the API is `/api/v1/trades`. The SDKs and
+  `lineage-two-way-payments` call the same thing a swap. Trade and swap are
+  one concept.
+- Older links under `/swap/` and `/api/v1/swaps` redirect to the trade URLs.
 - A trade is listed once, not once per half. Its `legs` say who gave what to
   whom, derived from the halves' expectations.
 - Only settled trades appear. A half still waiting for its counterpart is in

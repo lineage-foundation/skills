@@ -18,7 +18,7 @@
     { "question": "How do I show who gave what to whom in a settled two-way swap, e.g. in an explorer?", "expectedSkill": "lineage-two-way-payments", "mustMention": ["expectations", "not a wallet address", "change"] },
     { "question": "I submitted one half of a two-way swap and it has been Pending for hours — why?", "expectedSkill": "lineage-two-way-payments", "mustMention": ["pending pool", "same", "not replicated"] },
     { "question": "How do I list every transaction an address has made, or see who currently holds an item?", "expectedSkill": "lineage-explorer", "mustMention": ["/api/v1", "holders", "genesis hash"] },
-    { "question": "The explorer website says trade but the API says swaps — are they different things?", "expectedSkill": "lineage-explorer", "mustMention": ["trade", "swap", "one concept"] },
+    { "question": "The explorer calls it a trade but the SDK docs call it a swap — are they different things?", "expectedSkill": "lineage-explorer", "mustMention": ["trade", "swap", "one concept"] },
     { "question": "What identifies an item on chain, and why is genesis_hash empty on the output that created it?", "expectedSkill": "lineage-fundamentals", "mustMention": ["genesis_hash", "creation", "metadata"] }
   ]
 }
