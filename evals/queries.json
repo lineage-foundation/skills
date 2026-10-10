@@ -14,6 +14,8 @@
     { "question": "My transaction submission returned a 500 — should I retry?", "expectedSkill": "lineage-api-errors", "mustMention": ["500", "retry", "detail"] },
     { "question": "Is there an MCP server for Lineage and what tools does it expose?", "expectedSkill": "lineage-mcp", "mustMention": ["mcp", "http", "transfer-funds"] },
     { "question": "My two-way swap never settles — what's wrong?", "expectedSkill": "lineage-two-way-payments", "mustMention": ["version", "settle"] },
-    { "question": "How do I mint a new item asset via the HTTP API?", "expectedSkill": "lineage-v1-api", "mustMention": ["/v1/items"] }
+    { "question": "How do I mint a new item asset via the HTTP API?", "expectedSkill": "lineage-v1-api", "mustMention": ["/v1/items"] },
+    { "question": "How do I show who gave what to whom in a settled two-way swap, e.g. in an explorer?", "expectedSkill": "lineage-two-way-payments", "mustMention": ["expectations", "not a wallet address", "change"] },
+    { "question": "I submitted one half of a two-way swap and it has been Pending for hours — why?", "expectedSkill": "lineage-two-way-payments", "mustMention": ["pending pool", "same", "not replicated"] }
   ]
 }
