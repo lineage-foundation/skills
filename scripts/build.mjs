@@ -1,5 +1,5 @@
 import { mkdirSync, writeFileSync, rmSync, cpSync, existsSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { listSkills } from '../lib/skills.mjs';
 
@@ -63,11 +63,18 @@ export function build(rootDir) {
   );
   const keywords = ['lineage', 'blockchain', 'sdk', 'web3', ...skills.map((s) => s.name)];
 
+  // Claude Code only discovers <dir>/<name>/SKILL.md one level deep, so every
+  // track directory that holds skills has to be listed explicitly.
+  const skillRoots = [
+    ...new Set(skills.map((s) => `./${relative(rootDir, dirname(s.dir)).split(sep).join('/')}/`)),
+  ].sort();
+
   writeJson(join(rootDir, '.claude-plugin/plugin.json'), {
     name: 'lineage',
     description: DESCRIPTION,
     version: VERSION,
     author: AUTHOR,
+    skills: skillRoots,
   });
 
   writeJson(join(rootDir, '.claude-plugin/marketplace.json'), {
