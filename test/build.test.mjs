@@ -74,6 +74,13 @@ test('build fans out skills to cursor/gemini/opencode with references', () => {
   );
 });
 
+test('build lists every skill track directory in the claude manifest', () => {
+  const root = fixtureTwo();
+  build(root);
+  const plugin = JSON.parse(readFileSync(join(root, '.claude-plugin/plugin.json'), 'utf8'));
+  assert.deepEqual(plugin.skills, ['./skills/', './skills/track/']);
+});
+
 test('build writes AGENTS.md listing every skill', () => {
   const root = fixtureTwo();
   build(root);

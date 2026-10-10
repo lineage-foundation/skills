@@ -5,5 +5,10 @@
   "author": {
     "name": "Lineage Foundation",
     "email": "info@lineage.foundation"
-  }
+  },
+  "skills": [
+    "./skills/",
+    "./skills/building-on-lineage/",
+    "./skills/core-contributing/"
+  ]
 }
